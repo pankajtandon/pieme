@@ -3,7 +3,12 @@ MAINTAINER Vesto LLC
 
 RUN mkdir -p /mypy/src
 WORKDIR "/mypy/src"
+COPY requirements.txt /mypy/src
 COPY mypie.py /mypy/src
+COPY requirements.txt /mypy/src
+COPY server.py /mypy/src
 
-ENTRYPOINT python mypie.py
+RUN pip install --user -r requirements.txt
+
+ENTRYPOINT python server.py
 

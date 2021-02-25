@@ -13,35 +13,34 @@ Bootstrapping PiePie
   is the most recent version of the image build. The `.` at the end specifies that the image is to use a
   file called `Dockerfile` (default)  in the current directory.
   
-- Run the docker container and shell into it:
+- Run the docker container:
   ```aidl
-     docker run -it chris/greg bash
+     docker run -d -p 5000:5000 chris/greg
   ```
   
-  Above command starts the docker container and then shells into it (using bash). The `-it` flag
-  specifies to run the container interactively.
+  Above command starts the docker container in the background (`-d`). Because the ENTRYPOINT
+  into the container specifies a server start, we are telling the server to start on port 5000.
+  (This is not necessary).
+  
+  
+  - Ensure that the container is running by typing `docker ps`
+  
+  - Now shell into the container by 
+  
+      ```aidl
+
+      docker exec -it <containerId> bash  
+      ```
+
   
   Once you are in the container, you can run
-  
-  ```
-      pip -V
-      or 
-      python -V
-  ```
-  
-- You can view the container running (by opening a seperate terminal) and typing:
-
-   ```aidl
-      docker ps
-   ```
-  
-To run the container in the background:
-
-   ```aidl
-      docker run -d chris/greg bash
-      and then
-      docker ps to get the containerId
-      and then 
-      docker exec -it containerId bash  
-   ```
+ 
+          pip -V
+          or 
+          python -V
+       
+  - To stop the container
+    ```aidl
+        docker stop <containerId>
+    ```
   
